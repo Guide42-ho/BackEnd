@@ -2,6 +2,7 @@ const express = require('express');
 var bodyParser = require('body-parser')
 const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
+// ใช้ Static File  จาก "public"
 app.use(express.static('public'));
 
 app.get('/index.html', (req, res)=>{
@@ -39,6 +40,11 @@ app.post("/", (req,res)=>{
         res.send("น้ําหนักต่ํเกณฑ์")
     }
 });
+app.use((req, res, next) => {
+    const error = new Error("Not Found");
+    error.status = 404;
+    next(error); // ส่ง error ไปยัง middleware ถัดไป
+})
 
 app.listen(3000, ()=> {
    console.log ("Server is running on port 3000");
