@@ -40,6 +40,7 @@ app.get('/users2',(req, res) => {
     ];
     res.send(jsonData);
 })
+/// homework1_3ho
 app.get('/read-users', (req, res) => {
     fs.readFile('users.json', 'utf-8', (err, data) => {
         if (err) {
